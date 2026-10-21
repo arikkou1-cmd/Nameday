@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f5">
+  <title>Happy Nameday, Celine! 💗</title>
+  <style>
+    :root { --pink:#ff6f9f; --deep:#b52f66; --cream:#fff8fb; --ink:#5b3045; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 15% 15%, #fff 0, transparent 32%),
+                  linear-gradient(135deg, #ffe5ef, #fff5f8 48%, #f8e5ff);
+      display: grid; place-items: center; padding: 28px 16px;
+    }
+    .glow { position: fixed; width: 280px; height: 280px; border-radius: 50%; filter: blur(70px); opacity:.35; pointer-events:none; }
+    .glow.one { background:#ff8db5; top:-100px; left:-80px; }
+    .glow.two { background:#c8a0ff; bottom:-110px; right:-80px; }
+    .card {
+      width: min(100%, 760px); position:relative; z-index:1; text-align:center;
+      background: rgba(255,255,255,.78); border:1px solid rgba(255,255,255,.95);
+      border-radius: 30px; padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 24px 80px rgba(160, 65, 105, .16);
+      backdrop-filter: blur(12px); animation: arrive .9s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .eyebrow { color:var(--deep); text-transform:uppercase; letter-spacing:.2em; font-size:.75rem; font-weight:800; }
+    h1 { font-family: Georgia, "Times New Roman", serif; color:#b62f68; font-size:clamp(2.7rem, 8vw, 5.1rem); line-height:1.02; margin:14px 0 10px; }
+    .subtitle { font-size:clamp(1rem, 2.8vw, 1.2rem); margin:0 0 26px; color:#85506a; }
+    .photo-wrap { position:relative; width:min(100%, 440px); margin:0 auto 28px; }
+    .photo-wrap::before { content:""; position:absolute; inset:-9px; border:2px dashed #ff9fbd; border-radius:22px; transform:rotate(-2deg); }
+    .photo { display:block; position:relative; width:100%; max-height:520px; object-fit:cover; border-radius:17px; box-shadow:0 14px 35px #a64a6b2b; }
+    .photo-heart { position:absolute; right:-15px; top:-20px; font-size:2.7rem; transform:rotate(14deg); filter:drop-shadow(0 5px 5px #d45a8733); }
+    .message { font-family:Georgia, "Times New Roman", serif; font-size:clamp(1.1rem, 3vw, 1.4rem); line-height:1.75; max-width:570px; margin:0 auto; }
+    .message p { margin: 0 0 13px; }
+    .signature { margin-top:22px; color:#c04478; font-size:1.1rem; font-weight:700; }
+    .heart-button {
+      border:0; margin-top:25px; padding:14px 23px; border-radius:999px; cursor:pointer;
+      background:linear-gradient(135deg,#ff79a5,#e64d89); color:white; font-size:1rem; font-weight:800;
+      box-shadow:0 9px 22px #e64d8945; transition:transform .2s, box-shadow .2s;
+    }
+    .heart-button:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 12px 28px #e64d8960; }
+    .tiny { margin-top:22px; font-size:.8rem; color:#a8758d; }
+    .floating-heart { position:fixed; z-index:5; bottom:-40px; pointer-events:none; animation:float-up var(--duration, 4s) ease-in forwards; opacity:0; }
+    @keyframes arrive { from { opacity:0; transform:translateY(18px) scale(.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes float-up { 0% { transform:translateY(0) rotate(0deg) scale(.65); opacity:0; } 12% { opacity:.95; } 100% { transform:translateY(-115vh) rotate(var(--spin, 28deg)) scale(1.25); opacity:0; } }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+  <div class="glow one"></div><div class="glow two"></div>
+  <main class="card">
+    <div class="eyebrow">A little page made just for you</div>
+    <h1>Happy Nameday,<br>Celine! <span aria-hidden="true">💗</span></h1>
+    <p class="subtitle">Today is all about celebrating the amazing person you are.</p>
+    <div class="photo-wrap">
+      <img class="photo" src="assets/celine-and-me.jpg" alt="A photo of Celine and me together">
+      <span class="photo-heart" aria-hidden="true">💖</span>
+    </div>
+    <div class="message">
+      <p>I hope you have the most beautiful day imaginable, with all the love and care in the world.</p>
+      <p>You are truly amazing, and I hope this day is as amazing as you! 💕</p>
+    </div>
+    <div class="signature">All my love, always 💘</div>
+    <button class="heart-button" id="loveButton" type="button">Send you a little more love 💌</button>
+    <div class="tiny">Made with love, just for Celine ✨</div>
+  </main>
+  <script>
+    const hearts = ["💗", "💖", "💕", "💘", "❤️", "💞", "💓"];
+    function makeHeart(startOnScreen = false) {
+      const heart = document.createElement("span");
+      heart.className = "floating-heart";
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = (Math.random() * 100) + "vw";
+      heart.style.fontSize = (18 + Math.random() * 25) + "px";
+      heart.style.setProperty("--duration", (3.2 + Math.random() * 2.8) + "s");
+      heart.style.setProperty("--spin", (Math.random() * 100 - 50) + "deg");
+      if (startOnScreen) heart.style.bottom = (Math.random() * 30) + "vh";
+      document.body.appendChild(heart);
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+    // A burst of hearts appears as soon as the page opens.
+    window.addEventListener("load", () => {
+      for (let i = 0; i < 32; i++) setTimeout(() => makeHeart(true), i * 85);
+      setInterval(() => makeHeart(), 700);
+    });
+    document.getElementById("loveButton").addEventListener("click", () => {
+      for (let i = 0; i < 28; i++) setTimeout(() => makeHeart(true), i * 45);
+    });
+  </script>
+</body>
+</html>
